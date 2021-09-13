@@ -1,4 +1,4 @@
-module github.com/larryhou/codegen
+module github.com/larryhou/qrcgen
 
 go 1.15
 

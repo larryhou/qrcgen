@@ -2,7 +2,7 @@ package main
 
 import (
     "flag"
-    "github.com/larryhou/codegen"
+    "github.com/larryhou/qrcgen"
     "math/rand"
     "os"
     "strings"
