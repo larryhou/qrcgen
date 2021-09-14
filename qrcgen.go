@@ -32,13 +32,13 @@ type Client struct {
     FontFile string
     FontSize float64
     Spacing  float64
-    Assets   string
+    Library  string
     DPI      float64
     Size     int
 }
 
-func NewClient(content string, steps []Step, assets string, success bool) *Client {
-    c := &Client{Content: content, Steps: steps, FontFile: path.Join(assets, "default.ttf"), Assets: assets, Success: success}
+func NewClient(content string, steps []Step, library string, success bool) *Client {
+    c := &Client{Content: content, Steps: steps, FontFile: path.Join(library, "default.ttf"), Library: library, Success: success}
     c.FontSize = 50
     c.Spacing = 1.28
     c.Size = 2048
@@ -71,9 +71,9 @@ func (c *Client) Create() (*bytes.Buffer, error) {
     {
         r,g,b,a := qr.ForegroundColor.RGBA()
         rc := color.RGBA{R: uint8(r>>8), G: uint8(g>>8), B: uint8(b>>8), A: uint8(float64(a>>8) * 0.1)}
-        logo := "ok.png"
-        if !c.Success { logo = "no.png" }
-        if fp, err := os.Open(path.Join(c.Assets, logo)); err == nil {
+        name := "ok.png"
+        if !c.Success { name = "no.png" }
+        if fp, err := os.Open(path.Join(c.Library, name)); err == nil {
             defer fp.Close()
             if img, _, err := image.Decode(fp); err == nil {
                 if img, ok := img.(*image.NRGBA); ok {
